@@ -9,11 +9,8 @@ package uk.ac.rgu.cm2100.devices;
  *
  * @author mark
  */
-public class SmartPlug extends Device{
+public interface Colourable {
     
-    public SmartPlug(String name){
-        super(name);
-    }
-    
+    public void setColour(int r, int g, int b);
     
 }

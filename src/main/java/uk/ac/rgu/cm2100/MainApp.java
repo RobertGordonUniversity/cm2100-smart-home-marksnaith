@@ -5,19 +5,50 @@
  */
 package uk.ac.rgu.cm2100;
 
+import uk.ac.rgu.cm2100.devices.Colourable;
+import uk.ac.rgu.cm2100.devices.Device;
+import uk.ac.rgu.cm2100.devices.Dimmable;
+import uk.ac.rgu.cm2100.devices.Light;
+import uk.ac.rgu.cm2100.devices.SmartPlug;
+import uk.ac.rgu.cm2100.devices.Switchable;
+
 /**
  * Main class for running and testing the SmartHome application
+ *
  * @author Mark Snaith
  */
 public class MainApp {
-    
+
     /**
      * Main method for running the SmartHome application
-     * @param args 
+     *
+     * @param args
      */
-    public static void Main(String[] args){
-        //edit this comment to make your first commit and push
+    public static void main(String[] args) {
+
+        Device[] devices = new Device[2];
+        
+        devices[0] = new Light("hall");
+        devices[1] = new SmartPlug("kettle");
+        
+        for(Device d : devices){
+            System.out.println(d);
+        }
+        
+        
+        Switchable s = new Light("lounge");
+        
+        Light l = new Light("kitchen");
+        
+        Colourable c = new Light("bedroom");
+        
+    
+     
+        
+        Dimmable d = new Light("x");
+  
+        
         
     }
-   
+
 }

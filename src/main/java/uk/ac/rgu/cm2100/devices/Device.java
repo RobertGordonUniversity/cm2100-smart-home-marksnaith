@@ -15,4 +15,13 @@ public abstract class Device {
     public Device(String name){
         this.name = name;
     }
+    
+    public final String getName(){
+        return this.name;
+    }
+    
+    @Override
+    public final String toString(){
+        return this.name + " " + this.getClass().getSimpleName();
+    }
 }
