@@ -9,7 +9,7 @@ package uk.ac.rgu.cm2100.devices;
  *
  * @author mark
  */
-public class Light extends Device implements Switchable, Colourable, Dimmable{
+public class Light extends Device implements Switchable, Dimmable, Colourable{
     
     private Colour colour;
     
@@ -18,36 +18,36 @@ public class Light extends Device implements Switchable, Colourable, Dimmable{
         this.colour = new Colour(255, 255, 255);
     }
     
-    @Override
-    public void switchOn(){
-        System.out.println("Light is switched on");
-    }
-    
-    @Override
-    public void switchOff(){
-        System.out.println("Light is switched off");
-    }
-    
-    @Override
-    public void setColour(int r, int g, int b){
-        this.colour = new Colour(r, g, b);
-    }
-    
-    @Override
-    public void dimDown(){
-        
-    }
-    
-    
-    
     public Colour getColour(){
         return this.colour;
     }
 
     @Override
-    public void dimUp() {
+    public void switchOn() {
+        System.out.println("Light is on");
+        }
+
+    @Override
+    public void switchOff() {
+        System.out.println("Light is off");
         
+     }
+
+    @Override
+    public void dimUp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void dimDown() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setColour(int r, int g, int b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     public class Colour{
         

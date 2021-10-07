@@ -21,7 +21,7 @@ public abstract class Device {
     }
     
     @Override
-    public final String toString(){
+    public String toString(){
         return this.name + " " + this.getClass().getSimpleName();
     }
 }

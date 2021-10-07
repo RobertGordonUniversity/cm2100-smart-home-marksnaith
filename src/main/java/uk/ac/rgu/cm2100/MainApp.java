@@ -5,7 +5,6 @@
  */
 package uk.ac.rgu.cm2100;
 
-import uk.ac.rgu.cm2100.devices.Colourable;
 import uk.ac.rgu.cm2100.devices.Device;
 import uk.ac.rgu.cm2100.devices.Dimmable;
 import uk.ac.rgu.cm2100.devices.Light;
@@ -27,26 +26,25 @@ public class MainApp {
     public static void main(String[] args) {
 
         Device[] devices = new Device[2];
-        
-        devices[0] = new Light("hall");
-        devices[1] = new SmartPlug("kettle");
+
+        devices[0] = new Light("x");
+        devices[1] = new SmartPlug("y");
         
         for(Device d : devices){
             System.out.println(d);
         }
         
+        Light l = new Light("z");
+       
         
-        Switchable s = new Light("lounge");
+        Switchable s = new SmartPlug("a");
         
-        Light l = new Light("kitchen");
+        s.switchOn();
+        //s.switchOff();
+      
         
-        Colourable c = new Light("bedroom");
-        
-    
-     
-        
-        Dimmable d = new Light("x");
-  
+        Dimmable d;
+
         
         
     }
