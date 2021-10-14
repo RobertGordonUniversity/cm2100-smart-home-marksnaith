@@ -9,67 +9,72 @@ package uk.ac.rgu.cm2100.devices;
  *
  * @author mark
  */
-public class Light extends Device implements Switchable, Dimmable, Colourable{
-    
+public class Light extends Device implements Switchable, Dimmable, Colourable {
+
     private Colour colour;
-    
-    public Light(String name){
+
+    public Light(String name) {
         super(name);
         this.colour = new Colour(255, 255, 255);
     }
-    
-    public Colour getColour(){
+
+    public Colour getColour() {
         return this.colour;
     }
 
     @Override
     public void switchOn() {
-        System.out.println("Light is on");
-        }
+        System.out.println(this.name + " light is on");
+    }
 
     @Override
     public void switchOff() {
-        System.out.println("Light is off");
-        
-     }
+        System.out.println(this.name + " light is off");
+
+    }
 
     @Override
     public void dimUp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(this.name + " light dimmed up");
     }
 
     @Override
     public void dimDown() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(this.name + " light dimmed down");
     }
 
     @Override
     public void setColour(int r, int g, int b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.colour = new Colour(r, g, b);
+        System.out.println(this.name + " light colour set to " + this.colour); 
     }
 
-    
-    public class Colour{
-        
+    public class Colour {
+
         private int r, g, b;
-        
-        public Colour(int r, int g, int b){
+
+        public Colour(int r, int g, int b) {
             this.r = r;
             this.g = g;
             this.b = b;
         }
-        
-        public int getR(){
+
+        public int getR() {
             return this.r;
         }
-        
-        public int getG(){
+
+        public int getG() {
             return this.g;
         }
-        
-        public int getB(){
+
+        public int getB() {
             return this.b;
         }
+        
+        @Override
+        public String toString(){
+            return this.r + "," + this.g + "," + this.b;
+        }
     }
-    
+
 }
