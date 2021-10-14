@@ -5,11 +5,15 @@
  */
 package uk.ac.rgu.cm2100;
 
-import uk.ac.rgu.cm2100.devices.Device;
-import uk.ac.rgu.cm2100.devices.Dimmable;
+import uk.ac.rgu.cm2100.commands.ColourCommand;
+import uk.ac.rgu.cm2100.commands.PlayCommand;
 import uk.ac.rgu.cm2100.devices.Light;
-import uk.ac.rgu.cm2100.devices.SmartPlug;
-import uk.ac.rgu.cm2100.devices.Switchable;
+import uk.ac.rgu.cm2100.devices.Stereo;
+import uk.ac.rgu.cm2100.devices.Stereo.Song;
+import uk.ac.rgu.cm2100.devices.TVStick;
+import uk.ac.rgu.cm2100.devices.TVStick.Video;
+
+
 
 /**
  * Main class for running and testing the SmartHome application
@@ -25,26 +29,25 @@ public class MainApp {
      */
     public static void main(String[] args) {
 
-        Device[] devices = new Device[2];
-
-        devices[0] = new Light("x");
-        devices[1] = new SmartPlug("y");
+        var home = new Home();
+        var light = new Light("hall");
         
-        for(Device d : devices){
-            System.out.println(d);
-        }
+        var tvStick = new TVStick();
+        var stereo = new Stereo();
         
-        Light l = new Light("z");
-       
+        home.addCommand("light_colour", new ColourCommand(light));
+        home.addCommand("play_video", new PlayCommand<Video>(tvStick));
+        home.addCommand("play_song", new PlayCommand<Song>(stereo));
         
-        Switchable s = new SmartPlug("a");
+        home.addCommand("light_on", light::switchOn);
         
-        s.switchOn();
-        //s.switchOff();
-      
+        home.executeCommand("light_colour", 21, 86, 35);
         
-        Dimmable d;
-
+        home.executeCommand("light_on");
+        
+        home.executeCommand("play_video", new Video("Stranger Things", "Nextflix"));
+        home.executeCommand("play_song", new Song("500 Miles", "The Proclaimers"));
+        
         
         
     }
