@@ -12,7 +12,7 @@ import uk.ac.rgu.cm2100.devices.Colourable;
  *
  * @author mark
  */
-public class ColourCommand implements Command {
+public class ColourCommand implements Command{
     
     private final Colourable device;
     private int r, g, b;
@@ -24,14 +24,15 @@ public class ColourCommand implements Command {
     @Override
     public void execute() {
         this.device.setColour(r, g, b);
-        
-    }
+        }
 
     @Override
     public void addParameters(Object... parameters) {
        this.r = (int)parameters[0];
        this.g = (int)parameters[1];
        this.b = (int)parameters[2];
+       
     }
+
 
 }

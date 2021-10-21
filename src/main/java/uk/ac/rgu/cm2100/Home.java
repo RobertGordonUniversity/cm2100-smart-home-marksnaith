@@ -9,62 +9,78 @@ import uk.ac.rgu.cm2100.commands.Command;
 
 /**
  * Home class to act as the hub for the smart home
+ *
  * @author Mark Snaith
  */
 public class Home {
-    
+
     private final String[] labels;
     private final Command[] commands;
-    
+
     private int numCommands = 0; //keep track of the number of commands
-    
-    public Home(){
+
+    public Home() {
         this.labels = new String[10];
         this.commands = new Command[10];
     }
-    
+
     /**
      * Method to add a command with the given name
+     *
      * @param name
-     * @param command 
+     * @param command
+     * @throws uk.ac.rgu.cm2100.TooManyCommandsException
      */
-    public void addCommand(String name, Command command){
-        this.labels[numCommands] = name;
-        this.commands[numCommands] = command;
-        this.numCommands++;
+    public void addCommand(String name, Command command) throws TooManyCommandsException {
+
+        try {
+            this.labels[numCommands] = name;
+            this.commands[numCommands] = command;
+            numCommands++;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+             throw new TooManyCommandsException("Cannot add command " + name);
+        }
     }
-    
+
     /**
-     * Method to execute the command with the given name, passing the given parameters
+     * Method to execute the command with the given name, passing the given
+     * parameters
+     *
      * @param name
-     * @param parameters 
+     * @param parameters
      */
-    public void executeCommand(String name, Object... parameters){
-        
+    public void executeCommand(String name, Object... parameters) {
+
         Command c = null;
-        
+
         /* Loop over all the labels until we find a match - if one exists */
-        for(int i=0;i<this.labels.length;i++){
-            if(name.equals(this.labels[i])){
+        for (int i = 0; i < this.labels.length; i++) {
+            if (name.equals(this.labels[i])) {
                 c = this.commands[i];
                 break; //don't keep looping
             }
         }
-        
+
         /* If we have a command, add the parameters then execute */
-        if(c != null){
+        if (c != null) {
             c.addParameters(parameters);
             c.execute();
         }
     }
-    
+
     /**
      * Method to execute the no-parameter command with the given name
-     * @param name 
+     *
+     * @param name
      */
-    public void executeCommand(String name){
+    public void executeCommand(String name) {
         //simply call the other method, passing an empty object array
         this.executeCommand(name, new Object[0]);
     }
-    
+
+    @Override
+    public String toString() {
+        return "My smart home";
+    }
+
 }

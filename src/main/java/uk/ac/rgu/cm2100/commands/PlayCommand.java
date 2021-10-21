@@ -21,7 +21,7 @@ public class PlayCommand<T> implements Command{
     }
     
     public void execute(){
-        this.device.play(this.media);
+        this.device.play(media);
     }
     
     public void addParameters(Object... parameters){
