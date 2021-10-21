@@ -15,7 +15,7 @@ public class TVStick implements Playable<Video> {
 
     @Override
     public void play(Video media) {
-        System.out.println("Playing " + media); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Playing " + media);
     }
 
     public static class Video {
