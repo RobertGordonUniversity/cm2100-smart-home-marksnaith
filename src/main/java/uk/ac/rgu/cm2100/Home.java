@@ -29,16 +29,14 @@ public class Home {
      *
      * @param name
      * @param command
-     * @throws uk.ac.rgu.cm2100.TooManyCommandsException
      */
-    public void addCommand(String name, Command command) throws TooManyCommandsException {
-
+    public void addCommand(String name, Command command) throws TooManyCommandsException{
         try {
-            this.labels[numCommands] = name;
-            this.commands[numCommands] = command;
-            numCommands++;
+            this.labels[this.numCommands] = name;
+            this.commands[this.numCommands] = command;
+            this.numCommands++;
         } catch (ArrayIndexOutOfBoundsException ex) {
-             throw new TooManyCommandsException("Cannot add command " + name);
+            throw new TooManyCommandsException("Can't add command: " + name);
         }
     }
 
@@ -73,11 +71,10 @@ public class Home {
      *
      * @param name
      */
-    public void executeCommand(String name) {
-        //simply call the other method, passing an empty object array
-        this.executeCommand(name, new Object[0]);
-    }
-
+//    public void executeCommand(String name) {
+//        //simply call the other method, passing an empty object array
+//        this.executeCommand(name, new Object[0]);
+//    }
     @Override
     public String toString() {
         return "My smart home";

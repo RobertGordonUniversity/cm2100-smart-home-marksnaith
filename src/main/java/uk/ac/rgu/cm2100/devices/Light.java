@@ -25,11 +25,15 @@ public class Light extends Device implements Switchable, Dimmable, Colourable {
     @Override
     public void switchOn() {
         System.out.println(this.name + " light is on");
+        this.writeToLog(this.name + " light is on");
+        this.setStatus(OnOffStatus.ON);
     }
 
     @Override
     public void switchOff() {
         System.out.println(this.name + " light is off");
+        this.writeToLog(this.name + " light is off");
+        this.setStatus(OnOffStatus.OFF);
 
     }
 
@@ -47,6 +51,7 @@ public class Light extends Device implements Switchable, Dimmable, Colourable {
     public void setColour(int r, int g, int b) {
         this.colour = new Colour(r, g, b);
         System.out.println(this.name + " light colour set to " + this.colour); 
+        this.writeToLog(this.name + " light colour set to " + this.colour);
     }
 
     public class Colour {
