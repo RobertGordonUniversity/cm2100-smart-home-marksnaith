@@ -5,7 +5,16 @@
  */
 package uk.ac.rgu.cm2100;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import uk.ac.rgu.cm2100.commands.Command;
+import uk.ac.rgu.cm2100.devices.Device;
+import uk.ac.rgu.cm2100.devices.Device.DeviceComparator;
 
 /**
  * Home class to act as the hub for the smart home
@@ -18,10 +27,37 @@ public class Home {
     private final Command[] commands;
 
     private int numCommands = 0; //keep track of the number of commands
+    
+    public List<Device> devices;
+    private Map<String, Command> commandsMap;
 
     public Home() {
         this.labels = new String[10];
         this.commands = new Command[10];
+        
+        this.devices = new ArrayList<>();
+        
+        this.commandsMap = new HashMap<>();
+    }
+    
+    public void addDevice(Device device){
+        this.devices.add(device);
+    }
+    
+    public List<Device> getDevicesByName(){
+        Collections.sort(this.devices);
+        return this.devices;
+    }
+    
+    public List<String> getDevicesByType(){
+        
+        List<String> result = this.devices.stream()
+                                  .sorted(new DeviceComparator())
+                                  .map((d) -> d.getName() + " " + d.getClass().getSimpleName())
+                                  .collect(Collectors.toList());
+        
+        
+        return result;
     }
 
     /**
@@ -30,14 +66,9 @@ public class Home {
      * @param name
      * @param command
      */
-    public void addCommand(String name, Command command) throws TooManyCommandsException{
-        try {
-            this.labels[this.numCommands] = name;
-            this.commands[this.numCommands] = command;
-            this.numCommands++;
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new TooManyCommandsException("Can't add command: " + name);
-        }
+    public void addCommand(String name, Command command, Device device){
+        this.devices.add(device);      
+        this.commandsMap.put(name, command);
     }
 
     /**
@@ -48,22 +79,23 @@ public class Home {
      * @param parameters
      */
     public void executeCommand(String name, Object... parameters) {
+        Command c = this.commandsMap.get(name);
 
-        Command c = null;
-
-        /* Loop over all the labels until we find a match - if one exists */
-        for (int i = 0; i < this.labels.length; i++) {
-            if (name.equals(this.labels[i])) {
-                c = this.commands[i];
-                break; //don't keep looping
-            }
-        }
 
         /* If we have a command, add the parameters then execute */
         if (c != null) {
             c.addParameters(parameters);
             c.execute();
         }
+    }
+    
+    public class Test implements Comparator<Home>{
+
+        @Override
+        public int compare(Home o1, Home o2) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
     }
 
     /**

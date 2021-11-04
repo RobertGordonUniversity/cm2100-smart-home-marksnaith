@@ -11,7 +11,11 @@ import uk.ac.rgu.cm2100.devices.Stereo.Song;
  *
  * @author mark
  */
-public class Stereo implements Playable<Song>  {
+public class Stereo extends Device implements Playable<Song>  {
+
+    public Stereo(String name) {
+        super(name);
+    }
 
     @Override
     public void play(Song media) {

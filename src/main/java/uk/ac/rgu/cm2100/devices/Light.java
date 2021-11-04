@@ -26,15 +26,14 @@ public class Light extends Device implements Switchable, Dimmable, Colourable {
     public void switchOn() {
         System.out.println(this.name + " light is on");
         this.writeToLog(this.name + " light is on");
-        this.setStatus(OnOffStatus.ON);
+        this.setDeviceStatus(SwitchableStatus.ON);
     }
 
     @Override
     public void switchOff() {
         System.out.println(this.name + " light is off");
         this.writeToLog(this.name + " light is off");
-        this.setStatus(OnOffStatus.OFF);
-
+        this.setDeviceStatus(SwitchableStatus.OFF);
     }
 
     @Override

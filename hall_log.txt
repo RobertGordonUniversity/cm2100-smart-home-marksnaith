@@ -1,9 +1,11 @@
 hall light is on
+hall light is off
+hall light is on
+hall light is off
+hall light is on
+hall light is off
+hall light is on
+hall light is off
 hall light is on
 hall light is on
-hall light colour set to 21,65,35
-hall light is on
-hall light colour set to 21,65,35
-hall light is on
-hall light colour set to 21,65,35
 hall light is on

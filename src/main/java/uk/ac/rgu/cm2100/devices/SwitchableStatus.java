@@ -9,7 +9,7 @@ package uk.ac.rgu.cm2100.devices;
  *
  * @author mark
  */
-public enum OnOffStatus {
+public enum SwitchableStatus implements DeviceStatus {
     ON,
     OFF;
     
@@ -17,6 +17,4 @@ public enum OnOffStatus {
     public String toString(){
         return this.name().toLowerCase();
     }
-    
-    
 }

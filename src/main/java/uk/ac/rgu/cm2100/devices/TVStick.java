@@ -11,7 +11,11 @@ import uk.ac.rgu.cm2100.devices.TVStick.Video;
  *
  * @author mark
  */
-public class TVStick implements Playable<Video> {
+public class TVStick extends Device implements Playable<Video> {
+
+    public TVStick(String name) {
+        super(name);
+    }
 
     @Override
     public void play(Video media) {

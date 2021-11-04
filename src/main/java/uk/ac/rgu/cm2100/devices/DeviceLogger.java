@@ -20,28 +20,29 @@ public class DeviceLogger {
 
     private final String filename;
 
-    public DeviceLogger(String filename) throws IOException {
+    public DeviceLogger(String filename) throws IOException{
         this.filename = filename + ".txt";
-
+        
         File log = new File(this.filename);
-
         log.createNewFile();
+        
 
     }
 
     public void log(String message) {
 
-        try (FileWriter fw = new FileWriter(this.filename, true);
-                BufferedWriter bw = new BufferedWriter(fw)) {
-
+        try(FileWriter fw = new FileWriter(this.filename, true);
+                BufferedWriter bw = new BufferedWriter(fw)){
+            
             bw.write(message + "\n");
             bw.close();
             fw.close();
-
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
+            
+        }catch(IOException ex){
+            System.out.println("Error:" + ex.getMessage());
         }
-
+        
+        
     }
 
     public void readLog() {
@@ -49,18 +50,21 @@ public class DeviceLogger {
         try(FileReader fr = new FileReader(this.filename);
                 BufferedReader br = new BufferedReader(fr)){
             
-            String line;// = br.readLine();
+            String line = br.readLine();
             
-            while((line = br.readLine()) != null){
+            while(line != null){
                 System.out.println(line);
+                line = br.readLine();
             }
             
             br.close();
             fr.close();
             
+            
         }catch(IOException ex){
-            System.out.println("Error: " + ex.getMessage());
+            System.out.println("Error:" + ex.getMessage());
         }
+
    
     }
 
