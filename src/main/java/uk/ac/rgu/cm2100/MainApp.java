@@ -22,7 +22,7 @@ public class MainApp {
      *
      * @param args
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         var home = new Home();
         
         var light = new Light("hall");
