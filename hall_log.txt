@@ -9,3 +9,5 @@ hall light is off
 hall light is on
 hall light is on
 hall light is on
+hall light is on
+hall light is on

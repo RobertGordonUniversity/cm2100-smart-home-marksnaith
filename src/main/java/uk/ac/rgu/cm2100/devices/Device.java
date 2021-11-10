@@ -5,10 +5,13 @@
  */
 package uk.ac.rgu.cm2100.devices;
 
+import uk.ac.rgu.cm2100.devices.logging.DeviceLogger;
+import uk.ac.rgu.cm2100.devices.status.DeviceStatus;
 import java.io.IOException;
 import java.util.Comparator;
 
 /**
+ * Class to model a base device, with shared functionality
  *
  * @author mark
  */
@@ -17,11 +20,14 @@ public abstract class Device implements Comparable<Device> {
     protected String name;
     private DeviceLogger logger;
 
-    private DeviceStatus status;
+    protected DeviceStatus status;
+
+    private int serialNumber = 0;
 
     public Device(String name) {
         this.name = name;
 
+        /* Try to create a logger for this device */
         try {
             this.logger = new DeviceLogger(this.name + "_log");
         } catch (IOException ex) {
@@ -30,12 +36,20 @@ public abstract class Device implements Comparable<Device> {
 
     }
 
-    protected void setDeviceStatus(DeviceStatus status) {
-        this.status = status;
-    }
-
     public DeviceStatus getDeviceStatus() {
         return this.status;
+    }
+
+    public final String getName() {
+        return this.name;
+    }
+
+    public final void setSerialNumber(int number) {
+        this.serialNumber = number;
+    }
+
+    public final int getSerialNumber() {
+        return this.serialNumber;
     }
 
     protected void writeToLog(String message) {
@@ -45,10 +59,6 @@ public abstract class Device implements Comparable<Device> {
     public final void printLog() {
         System.out.println("===Log for " + this.name + "===");
         this.logger.readLog();
-    }
-
-    public final String getName() {
-        return this.name;
     }
 
     @Override
@@ -64,23 +74,29 @@ public abstract class Device implements Comparable<Device> {
         }
         return false;
     }
-    
+
     @Override
-    public int compareTo(Device other){
-        return this.name.compareTo(other.name);
+    public int compareTo(Device other) {
+
+        if (this.serialNumber < other.serialNumber) {
+            return -1;
+        } else if (this.serialNumber > other.serialNumber) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
-    
-    
-    public static class DeviceComparator implements Comparator<Device>{
+
+    public static class DeviceComparator implements Comparator<Device> {
 
         @Override
         public int compare(Device o1, Device o2) {
-            String name1 = o1.getClass().getSimpleName();
-            String name2 = o2.getClass().getSimpleName();
-            
-            
-            return name1.compareTo(name2);
+
+            String type1 = o1.getClass().getSimpleName().toLowerCase();
+            String type2 = o2.getClass().getSimpleName().toLowerCase();
+
+            return type1.compareTo(type2);
         }
-        
+
     }
 }

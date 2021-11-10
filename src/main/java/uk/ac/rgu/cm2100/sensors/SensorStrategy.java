@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.rgu.cm2100.devices;
+package uk.ac.rgu.cm2100.sensors;
+
+import uk.ac.rgu.cm2100.Home;
 
 /**
  *
  * @author mark
  */
-public interface Colourable {
-    
-    public void setColour(int r, int g, int b);
-    
+public interface SensorStrategy {
+    public void perform(Home home, Sensor sensor);
 }

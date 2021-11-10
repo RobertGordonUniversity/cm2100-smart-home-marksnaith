@@ -6,7 +6,7 @@
 package uk.ac.rgu.cm2100.commands;
 
 import java.util.HashSet;
-import uk.ac.rgu.cm2100.devices.Colourable;
+import uk.ac.rgu.cm2100.devices.functionality.Colourable;
 
 /**
  *

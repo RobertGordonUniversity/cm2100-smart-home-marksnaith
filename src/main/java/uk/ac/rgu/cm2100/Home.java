@@ -7,7 +7,6 @@ package uk.ac.rgu.cm2100;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,47 +14,45 @@ import java.util.stream.Collectors;
 import uk.ac.rgu.cm2100.commands.Command;
 import uk.ac.rgu.cm2100.devices.Device;
 import uk.ac.rgu.cm2100.devices.Device.DeviceComparator;
+import uk.ac.rgu.cm2100.sensors.SensorStrategy;
 
 /**
  * Home class to act as the hub for the smart home
  *
  * @author Mark Snaith
  */
-public class Home {
-
-    private final String[] labels;
-    private final Command[] commands;
-
-    private int numCommands = 0; //keep track of the number of commands
+public class Home{
     
-    public List<Device> devices;
-    private Map<String, Command> commandsMap;
-
+    private final List<Device> devices;
+    private final Map<String, Command> commandsMap;
+    
+    private final Map<String, SensorStrategy> sensorStrategies;
+    
     public Home() {
-        this.labels = new String[10];
-        this.commands = new Command[10];
-        
-        this.devices = new ArrayList<>();
-        
+        this.devices = new ArrayList<>();        
         this.commandsMap = new HashMap<>();
+        this.sensorStrategies = new HashMap<>();
     }
     
-    public void addDevice(Device device){
+    public void addDevice(Device device) {
         this.devices.add(device);
     }
     
-    public List<Device> getDevicesByName(){
+    public List<Device> getDevices() {
+        return this.devices;
+    }
+    
+    public List<Device> getDevicesByName() {
         Collections.sort(this.devices);
         return this.devices;
     }
     
-    public List<String> getDevicesByType(){
+    public List<String> getDevicesByType() {
         
         List<String> result = this.devices.stream()
-                                  .sorted(new DeviceComparator())
-                                  .map((d) -> d.getName() + " " + d.getClass().getSimpleName())
-                                  .collect(Collectors.toList());
-        
+                .sorted(new DeviceComparator())
+                .map((d) -> d.getName() + " " + d.getClass().getSimpleName())
+                .collect(Collectors.toList());
         
         return result;
     }
@@ -66,8 +63,9 @@ public class Home {
      * @param name
      * @param command
      */
-    public void addCommand(String name, Command command, Device device){
-        this.devices.add(device);      
+    public void addCommand(String name, Command command, Device device) {
+        
+        this.devices.add(device);        
         this.commandsMap.put(name, command);
     }
 
@@ -79,8 +77,8 @@ public class Home {
      * @param parameters
      */
     public void executeCommand(String name, Object... parameters) {
+        
         Command c = this.commandsMap.get(name);
-
 
         /* If we have a command, add the parameters then execute */
         if (c != null) {
@@ -89,27 +87,13 @@ public class Home {
         }
     }
     
-    public class Test implements Comparator<Home>{
-
-        @Override
-        public int compare(Home o1, Home o2) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-        
+    public void addSensorStrategy(String sensorName, SensorStrategy strategy) {
+        this.sensorStrategies.put(sensorName, strategy);
     }
-
-    /**
-     * Method to execute the no-parameter command with the given name
-     *
-     * @param name
-     */
-//    public void executeCommand(String name) {
-//        //simply call the other method, passing an empty object array
-//        this.executeCommand(name, new Object[0]);
-//    }
+    
     @Override
     public String toString() {
         return "My smart home";
     }
-
+    
 }

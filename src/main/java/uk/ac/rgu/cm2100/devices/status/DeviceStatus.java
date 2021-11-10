@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.rgu.cm2100.devices;
+package uk.ac.rgu.cm2100.devices.status;
 
 /**
  *
  * @author mark
  */
-public interface Switchable {
-    public void switchOn();
-    public void switchOff();
+public interface DeviceStatus {
+    
 }

@@ -5,10 +5,11 @@
  */
 package uk.ac.rgu.cm2100.devices;
 
+import uk.ac.rgu.cm2100.devices.functionality.Playable;
 import uk.ac.rgu.cm2100.devices.TVStick.Video;
 
 /**
- *
+ * Class representing a TV stick in the smart home
  * @author mark
  */
 public class TVStick extends Device implements Playable<Video> {
@@ -22,10 +23,13 @@ public class TVStick extends Device implements Playable<Video> {
         System.out.println("Playing " + media);
     }
 
+    /**
+     * Nested class to represent a video that can be played
+     */
     public static class Video {
 
-        private String title;
-        private String platform;
+        private final String title;
+        private final String platform;
 
         public Video(String title, String platform) {
             this.title = title;

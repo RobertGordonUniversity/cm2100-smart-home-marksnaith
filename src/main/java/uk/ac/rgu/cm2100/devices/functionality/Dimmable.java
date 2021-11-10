@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.rgu.cm2100.devices;
+package uk.ac.rgu.cm2100.devices.functionality;
 
 /**
  *
  * @author mark
  */
-public interface DeviceStatus {
+public interface Dimmable {
+    
+    public void dimUp();
+    public void dimDown();
     
 }

@@ -7,8 +7,8 @@ package uk.ac.rgu.cm2100;
 
 import java.io.IOException;
 import uk.ac.rgu.cm2100.devices.Light;
-import uk.ac.rgu.cm2100.devices.Stereo;
-import uk.ac.rgu.cm2100.devices.TVStick;
+import uk.ac.rgu.cm2100.sensors.LightSensor;
+import uk.ac.rgu.cm2100.sensors.SensorStrategy;
 
 /**
  * Main class for running and testing the SmartHome application
@@ -24,31 +24,20 @@ public class MainApp {
      */
     public static void main(String[] args) throws IOException {
         var home = new Home();
+        
         var light = new Light("hall");
-        var light2 = new Light("living_room");
+        
+        home.addCommand("hall_light_on", light::switchOn, light);
 
-       
-        var tvStick = new TVStick("amazon");
-        var stereo = new Stereo("sonos");
+        var lightSensor = new LightSensor("hall_sensor");
+
+        SensorStrategy strategy = (h, s) -> {
+
+        };
         
-        home.addDevice(tvStick);
-        home.addDevice(stereo);
-        home.addDevice(light2);
-        home.addDevice(light);
-        
-        
-        
-        //home.getDevicesByName().forEach(System.out::println);
-        
-        home.devices.forEach(System.out::println);
-        System.out.println();
-        
-        home.getDevicesByType().forEach(System.out::println);
-        
-        
-//        home.addCommand("switch_on_light", light::switchOn, light);
-//        
-//        home.executeCommand("switch_on_light");
+        home.addSensorStrategy("hall_sensor", strategy);      
+        //lightSensor.addEventHandler(home);      
+        lightSensor.setLightLevel(5);
         
         
 

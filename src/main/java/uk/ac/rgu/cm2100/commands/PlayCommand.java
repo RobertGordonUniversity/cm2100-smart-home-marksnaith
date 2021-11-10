@@ -5,7 +5,7 @@
  */
 package uk.ac.rgu.cm2100.commands;
 
-import uk.ac.rgu.cm2100.devices.Playable;
+import uk.ac.rgu.cm2100.devices.functionality.Playable;
 
 /**
  *

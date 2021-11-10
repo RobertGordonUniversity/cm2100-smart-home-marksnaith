@@ -5,6 +5,11 @@
  */
 package uk.ac.rgu.cm2100.devices;
 
+import uk.ac.rgu.cm2100.devices.status.SwitchableStatus;
+import uk.ac.rgu.cm2100.devices.functionality.Colourable;
+import uk.ac.rgu.cm2100.devices.functionality.Switchable;
+import uk.ac.rgu.cm2100.devices.functionality.Dimmable;
+
 /**
  *
  * @author mark
@@ -26,14 +31,16 @@ public class Light extends Device implements Switchable, Dimmable, Colourable {
     public void switchOn() {
         System.out.println(this.name + " light is on");
         this.writeToLog(this.name + " light is on");
-        this.setDeviceStatus(SwitchableStatus.ON);
+        
+        this.status = SwitchableStatus.ON;
     }
 
     @Override
     public void switchOff() {
         System.out.println(this.name + " light is off");
         this.writeToLog(this.name + " light is off");
-        this.setDeviceStatus(SwitchableStatus.OFF);
+        
+        this.status = SwitchableStatus.OFF;
     }
 
     @Override

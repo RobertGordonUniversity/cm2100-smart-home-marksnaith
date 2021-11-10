@@ -5,10 +5,11 @@
  */
 package uk.ac.rgu.cm2100.devices;
 
+import uk.ac.rgu.cm2100.devices.functionality.Playable;
 import uk.ac.rgu.cm2100.devices.Stereo.Song;
 
 /**
- *
+ * Class representing a stereo in the smart home
  * @author mark
  */
 public class Stereo extends Device implements Playable<Song>  {
@@ -22,9 +23,12 @@ public class Stereo extends Device implements Playable<Song>  {
         System.out.println("Playing " + media);
     }
     
+    /**
+     * Nested class to represent a song that can be played
+     */
     public static class Song{
-        private String title;
-        private String artist;
+        private final String title;
+        private final String artist;
         
         public Song(String title, String artist){
             this.title = title;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.rgu.cm2100.devices;
+package uk.ac.rgu.cm2100.devices.logging;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
