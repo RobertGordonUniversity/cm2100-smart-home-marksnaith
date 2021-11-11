@@ -20,6 +20,7 @@ public class LightSensor extends Sensor {
     
     public void setLightLevel(int level){
         this.lightLevel = level;
+        this.notifyHandlers();
     }
     
     public int getLightLevel(){

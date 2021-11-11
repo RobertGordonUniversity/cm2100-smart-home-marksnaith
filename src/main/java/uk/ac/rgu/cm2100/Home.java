@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import uk.ac.rgu.cm2100.commands.Command;
 import uk.ac.rgu.cm2100.devices.Device;
 import uk.ac.rgu.cm2100.devices.Device.DeviceComparator;
+import uk.ac.rgu.cm2100.sensors.Sensor;
+import uk.ac.rgu.cm2100.sensors.SensorEventHandler;
 import uk.ac.rgu.cm2100.sensors.SensorStrategy;
 
 /**
@@ -21,7 +23,7 @@ import uk.ac.rgu.cm2100.sensors.SensorStrategy;
  *
  * @author Mark Snaith
  */
-public class Home{
+public class Home implements SensorEventHandler{
     
     private final List<Device> devices;
     private final Map<String, Command> commandsMap;
@@ -94,6 +96,16 @@ public class Home{
     @Override
     public String toString() {
         return "My smart home";
+    }
+
+    @Override
+    public void receieveEvent(Sensor sensor) {
+        //System.out.println("Event from sensor: " + sensor.getName());
+        SensorStrategy strategy;
+        
+        if((strategy = this.sensorStrategies.get(sensor.getName())) != null){
+            strategy.perform(this, sensor);
+        }
     }
     
 }
