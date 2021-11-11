@@ -5,7 +5,6 @@
  */
 package uk.ac.rgu.cm2100;
 
-import java.io.IOException;
 import uk.ac.rgu.cm2100.devices.Light;
 import uk.ac.rgu.cm2100.sensors.LightSensor;
 import uk.ac.rgu.cm2100.sensors.SensorStrategy;
@@ -23,20 +22,21 @@ public class MainApp {
      * @param args
      */
     public static void main(String[] args){
-        var home = new Home();
-        
+        var home = new Home();       
         var light = new Light("hall");
         
         home.addCommand("hall_light_on", light::switchOn, light);
 
         var lightSensor = new LightSensor("hall_sensor");
 
+        //lightSensor.addEventHandler(home); 
+        
         SensorStrategy strategy = (h, s) -> {
 
         };
         
         home.addSensorStrategy("hall_sensor", strategy);      
-        //lightSensor.addEventHandler(home);      
+             
         lightSensor.setLightLevel(5);
         
         
